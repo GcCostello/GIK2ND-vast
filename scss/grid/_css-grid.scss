@@ -1,0 +1,112 @@
+@use "../abstracts/variables/colors" as c;
+@use "../abstracts/mixins/" as *;
+
+.grid {
+    width: 100%;
+    display: grid;
+    grid-gap: var(--gridMargin);
+    &--replica {
+        grid-template-columns: repeat(1, 1fr);
+        @include screen-sm {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include screen-lg {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include screen-xl {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @include screen-2xl {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
+    &--example {
+        grid-template-columns: repeat(6, calc(((98vw - (var(--pageSidePadding) * 2 + var(--gridMargin) * 6)) / 6)));
+        grid-template-rows: repeat(6, calc(((98vw - (var(--pageSidePadding) * 2 + var(--gridMargin) * 6)) / 6)));
+        grid-template-areas:
+            "div-17 div-17 div-1 div-4 div-9 div-13"
+            "div-17 div-17 div-1 div-5 div-10 div-14"
+            "div-17 div-17 div-2 div-6 div-11 div-15"
+            "div-17 div-17 div-2 div-7 div-7 div-16"
+            "div-17 div-17 div-3 div-7 div-7 div-16"
+            "div-17 div-17 div-3 div-8 div-12 div-16";
+        overflow: hidden;
+        @include screen-md {
+            grid-template-columns: repeat(5, calc((98vw - (var(--pageSidePadding) * 2 + var(--gridMargin) * 5)) / 5));
+            grid-template-rows: repeat(5, calc((98vw - (var(--pageSidePadding) * 2 + var(--gridMargin) * 5)) / 5));
+            grid-template-areas:
+                "div-1 div-2 div-3 div-4 div-5"
+                "div-6 div-17 div-17 div-17 div-7"
+                "div-8 div-17 div-17 div-17 div-9"
+                "div-10 div-17 div-17 div-17 div-11"
+                "div-12 div-13 div-14 div-15 div-16";
+        }
+        & > div {
+            border-radius: 1rem;
+            position: relative;
+            z-index: 2;
+            &:nth-child(1n + 1) {
+                // background-color: var(--clr1VeryLightSat);
+                background-color: light-sat(c.$blue);
+            }
+            &:nth-child(1n + 6) {
+                background-color: var(--clr1LightSat);
+            }
+            &:nth-child(1n + 8) {
+                background-color: var(--clr1Sat);
+            }
+            &:nth-child(1n + 10) {
+                background-color: var(--clr1DarkSat);
+            }
+            &:nth-child(1n + 12) {
+                background-color: var(--clr1VeryDarkSat);
+            }
+            &:nth-child(5n + 1):hover {
+                background-color: var(--clr1Sat);
+            }
+            &:nth-child(5n + 2):hover {
+                background-color: var(--clr2Sat);
+            }
+            &:nth-child(5n + 3):hover {
+                background-color: var(--clr3Sat);
+            }
+            &:nth-child(5n + 4):hover {
+                background-color: var(--clr4Sat);
+            }
+            &:nth-child(5n + 5):hover {
+                background-color: var(--clr5Sat);
+            }
+            @for $i from 1 through 16 {
+                &:nth-child(#{$i}) {
+                    grid-area: div-#{$i};
+                }
+            }
+            &:nth-child(17) {
+                grid-area: div-17;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--clr1ExtremelyDark);
+                color: var(--clr3Sat);
+                font-size: 5rem;
+                z-index: 1;
+                writing-mode: vertical-rl;
+                text-orientation: upright;
+                text-transform: uppercase;
+                letter-spacing: -10px;
+                &:hover {
+                    background-color: var(--clr1ExtremelyDark);
+                    text-shadow: 0 0 10px var(--clr3Sat), 0 0 20px var(--clr3Sat), 0 0 30px var(--clr3Sat);
+                    transform: scale(0.99);
+                }
+                @include screen-md {
+                    writing-mode: horizontal-tb;
+                    text-orientation: mixed;
+                    text-transform: initial;
+                    letter-spacing: initial;
+                }
+            }
+        }
+    }
+}

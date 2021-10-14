@@ -1,0 +1,57 @@
+@use '../variables/colors' as *;
+@use 'sass:color';
+@function dark($color) {
+    @return hsla(color.hue($color), $sat-base, $dark);
+}
+
+@function dark-sat($color) {
+    @return hsla(color.hue($color), $sat-high, $dark);
+}
+
+@function dark-desat($color) {
+    @return hsla(color.hue($color), $sat-low, $dark);
+}
+
+@function darker($color) {
+    @return hsla(color.hue($color), $sat-base, $darker);
+}
+
+@function darker-sat($color) {
+    @return hsla(color.hue($color), $sat-high, $darker);
+}
+
+@function darker-desat($color) {
+    @return hsla(color.hue($color), $sat-low, $darker);
+}
+
+@function sat($color) {
+    @return hsla(color.hue($color), $sat-high, $light-base);
+}
+
+@function desat($color) {
+    @return hsla(color.hue($color), $sat-low, $light-base);
+}
+
+@function light($color) {
+    @return hsla(color.hue($color), $sat-base, $light);
+}
+
+@function light-sat($color) {
+    @return hsla(color.hue($color), $sat-high, $light);
+}
+
+@function light-desat($color) {
+    @return hsla(color.hue($color), $sat-low, $light);
+}
+
+@function lighter($color) {
+    @return hsla(color.hue($color), $sat-base, $lighter);
+}
+
+@function light-sat($color) {
+    @return hsla(color.hue($color), $sat-high, $lighter);
+}
+
+@function light-desat($color) {
+    @return hsla(color.hue($color), $sat-low, $lighter);
+}
