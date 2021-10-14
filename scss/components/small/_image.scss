@@ -1,0 +1,55 @@
+@use '../../abstracts/variables/colors' as c;
+@use '../../abstracts/variables/sizes' as s;
+@use '../../abstracts/mixins/' as *;
+:root {
+    --img-padding: 1.5rem;
+}
+
+.image {
+    position: relative;
+    &--circle,
+    &--circle .image__container,
+    &--circle img,
+    &--circle .image__container::after {
+        border-radius: 50%;
+    }
+    &--rotate {
+        transform: rotate(0deg);
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
+    &--glass {
+        background-color: hsla(0, 0%, 100%, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    &__container {
+        position: relative;
+    }
+    &--glass .image__container {
+        padding: var(--img-padding);
+        box-shadow: inset 1px 1px 1px hsla(0, 0%, 100%, 0.667), inset -1px -1px 1px hsla(207, 39%, 20%, 0.188), 5px 5px 10px hsla(207, 39%, 20%, 0.188);
+    }
+    &--color .image__container::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: var(--img-padding);
+        left: var(--img-padding);
+        z-index: 1000;
+        height: calc(100% - var(--img-padding) * 2);
+        width: calc(100% - var(--img-padding) * 2);
+        background-color: dark-desat(c.$blue);
+        mix-blend-mode: color;
+        opacity: 0.35;
+    }
+    & img {
+        display: block;
+        object-fit: cover;
+        object-position: center center;
+        transition: all 500ms ease-in-out;
+    }
+    &--rotate .image__container:hover:hover img {
+        transform: rotate(360deg);
+    }
+}
